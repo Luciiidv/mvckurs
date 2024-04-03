@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block body %}
+    <h1>Magiskt nummer</h1>
+    <p>Bild slumpas fram beroende på nummret som visas.</p>
+    <p>Magiska nummret: {{ number }}</p>
+    <a href="{{ asset('build/images/' ~ foto) }}">
+        <img src="{{ asset('build/images/' ~ foto) }}" alt="surfbild" class="surfbild">
+    </a>
+{% endblock %}
