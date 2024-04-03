@@ -3,6 +3,18 @@
 {% block title %}About{% endblock %}
 
 {% block body %}
+    <div class="container">
+    
+    <div class="main-column">
     <h1>About</h1>
     <p>I denna kursen skall vi lära oss programmera webbapplikationer på ett objektorienterat sätt med fokus på det arkitekturella designmönstret MVC. För att komma igång behöver vi en bas och där har vi valt ramverket Symfony som är ett av de mer kända ramverken inom PHP.</p>
+    <p>Länk till kursens git repo: <a href="https://github.com/dbwebb-se/mvc/tree/main">Kursens repo</a></p>
+    <p>Länk till mitt git repo för kursen: <a href="https://github.com/Luciiidv/mvckurs">Mitt repo</a></p>
+    </div>
+
+    <div class="photo-column">
+        <img src="{{ asset('build/images/about.jpg') }}" alt="aboutbild" class="aboutbild">
+    </div>
+    
+    </div>
 {% endblock %}
