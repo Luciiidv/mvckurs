@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+<h1>Draw cards</h1>
+
+<p>How many cards do you want to draw?</p>
+
+<form method="post" action="">
+    <input type="number" name="draw_cards" min="1" max="{{ deck }}" value="1">
+    <input type="submit" name="do_it" value="Draw cards">
+</form>
+
+{% endblock %}

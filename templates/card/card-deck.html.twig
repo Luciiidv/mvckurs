@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+
+{% for card in deck %}
+    <p>{{ card }}</p>
+{% endfor %}
+
+{# {{ dump(deck) }} #}
+
+{% endblock %}

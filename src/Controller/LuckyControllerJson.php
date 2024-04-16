@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyControllerJson
 {
-
     #[Route("/api/qoute", name: 'api_qoute')]
     public function jsonQoute(): Response
     {

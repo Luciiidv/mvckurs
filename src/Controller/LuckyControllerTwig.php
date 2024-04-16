@@ -52,4 +52,3 @@ class LuckyControllerTwig extends AbstractController
     }
 
 }
-
