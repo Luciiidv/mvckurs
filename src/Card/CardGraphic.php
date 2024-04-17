@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Card;
+
 use App\Card\Card;
 
-class CardGraphic extends Card {
-
-    public function __construct($value=null, $color=null) {
+class CardGraphic extends Card
+{
+    public function __construct($value = null, $color = null)
+    {
         parent::__construct($value, $color);
         $deckGraphic = [];
         if($value && $color) {
@@ -13,7 +15,8 @@ class CardGraphic extends Card {
         }
     }
 
-    public function getAsString() {
+    public function getAsString()
+    {
         return $this->representation;
     }
 
@@ -33,7 +36,8 @@ class CardGraphic extends Card {
         return;
     }
 
-    public function deckToString($deck) {
+    public function deckToString($deck)
+    {
         // $this->deckGraphic = [];
         foreach ($deck->getDeckOfCards() as $card) {
             $card = new CardGraphic($card->getValue(), $card->getColor());
@@ -42,7 +46,8 @@ class CardGraphic extends Card {
         return $this;
     }
 
-    public function addArray($array) {
+    public function addArray($array)
+    {
         // $this->deckGraphic = [];
         foreach ($array as $card) {
             $this->deckGraphic[] = $card;
@@ -50,7 +55,9 @@ class CardGraphic extends Card {
         return $this;
     }
 
-    public function shuffleCardDeck() {
+    public function shuffleCardDeck()
+    {
         return shuffle($this->deckGraphic);
     }
+
 }
