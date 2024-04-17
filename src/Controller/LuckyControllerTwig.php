@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Card\DeckOfCards;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LuckyControllerTwig extends AbstractController
 {
@@ -46,8 +49,12 @@ class LuckyControllerTwig extends AbstractController
     }
 
     #[Route("/api", name: "api")]
-    public function api(): Response
-    {
+    public function api(
+        SessionInterface $session
+    ): Response {
+        $deck = new DeckOfCards();
+        $session->set("deck", $deck->deckOfCardsJson());
+        $session->set("cardHand", []);
         return $this->render('api.html.twig');
     }
 
