@@ -1,18 +1,22 @@
 <?php
 
 namespace App\Card;
+
 use App\Card\DeckOfCards;
 
-class CardHand {
+class CardHand
+{
     public $cardHand;
     public $cardDeck;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->cardHand = [];
         $this->cardDeck = [];
     }
 
-    public function addCardHand($numberOfCards, $deckOfCards) {
+    public function addCardHand($numberOfCards, $deckOfCards)
+    {
         if(!$deckOfCards || $numberOfCards > count($deckOfCards)) {
             return $this;
         }
@@ -22,7 +26,8 @@ class CardHand {
         $this->cardDeck = array_slice($deckOfCards, $numberOfCards);
     }
 
-    public function addToHand($cards) {
+    public function addToHand($cards)
+    {
         for ($i = 0; $i < count($cards); $i++) {
             // $card = $deckOfCards[$i];
             // unset($deckOfCards[$i]);
@@ -31,11 +36,31 @@ class CardHand {
         }
     }
 
-    public function getCardHand() {
+    public function getCardHand()
+    {
         return $this->cardHand;
     }
 
-    public function getCardDeck() {
+    public function getCardDeck()
+    {
         return $this->cardDeck;
+    }
+
+    public function apiCardHand()
+    {
+        $apiCardHand = [];
+        foreach($this->cardHand as $card) {
+            $apiCardHand[] = $card;
+        }
+        return $apiCardHand;
+    }
+
+    public function apiCardDeck()
+    {
+        $apiCardDeck = [];
+        foreach($this->cardDeck as $card) {
+            $apiCardDeck[] = $card;
+        }
+        return $apiCardDeck;
     }
 }
