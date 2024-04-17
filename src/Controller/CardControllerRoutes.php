@@ -18,8 +18,7 @@ class CardControllerRoutes extends AbstractController
     #[Route("/card/init", name: "card_init")]
     public function init(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         //initiera sessionerna.
         $deck = new DeckOfCards();
         $deckAsString = new CardGraphic();
@@ -33,20 +32,18 @@ class CardControllerRoutes extends AbstractController
     #[Route("/session", name: "session_show")]
     public function session(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $data = [
             'session' => $session->all()
         ];
-    
+
         return $this->render('card/session.html.twig', $data);
     }
 
     #[Route("/session/delete", name: "session_delete")]
     public function sessionDelete(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         //deletar sessionerna.
         $session->clear();
         return $this->redirect('card/session.html.twig');
@@ -56,22 +53,20 @@ class CardControllerRoutes extends AbstractController
     public function card(
         // Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         return $this->render('card/card.html.twig');
     }
 
     #[Route("/card/deck", name: "card_deck", methods: ['GET'])]
-    public function cardDeck(
-        SessionInterface $session
-    ): Response {
+    public function cardDeck(): Response
+    {
         $deck = new DeckOfCards();
         $deckToString = new CardGraphic();
 
         $data = [
             "deck" => $deckToString->deckToString($deck)->deckGraphic
         ];
-    
+
         return $this->render('card/card-deck.html.twig', $data);
     }
 
@@ -90,7 +85,7 @@ class CardControllerRoutes extends AbstractController
         $data = [
             "deck" =>  $deckAsString->deckGraphic
         ];
-    
+
         return $this->render('card/card-shuffle.html.twig', $data);
     }
 
@@ -100,33 +95,31 @@ class CardControllerRoutes extends AbstractController
         SessionInterface $session,
         $number = 1
     ): Response {
-            if ($session->get("drawNumber")) {
-                $number = $session->get("drawNumber");
-                $session->remove("drawNumber");
-            }
-            $deck = $session->get("deck");
-            $currentHand = $session->get("cardHand", []);
+        if ($session->get("drawNumber")) {
+            $number = $session->get("drawNumber");
+            $session->remove("drawNumber");
+        }
+        $deck = $session->get("deck");
+        $currentHand = $session->get("cardHand", []);
 
-            $card = new CardHand();
-            $card->addToHand($currentHand);
-            $card->addCardHand($number, $deck);
+        $card = new CardHand();
+        $card->addToHand($currentHand);
+        $card->addCardHand($number, $deck);
 
-            $session->set("deck", $card->getCardDeck());
-            $session->set("cardHand", $card->getCardHand());
+        $session->set("deck", $card->getCardDeck());
+        $session->set("cardHand", $card->getCardHand());
 
-            $data = [
-                "deck" => $card->getCardDeck(),
-                "cardHand" => $card->getCardHand(),
-                "deckSession" => $card->getCardDeck()
-            ];
-            return $this->render('card/card-draw.html.twig', $data);
+        $data = [
+            "deck" => $card->getCardDeck(),
+            "cardHand" => $card->getCardHand()
+        ];
+        return $this->render('card/card-draw.html.twig', $data);
     }
 
     #[Route("/card/deck/draw/number/form", name: "card_draw_numbers", methods: ['GET'])]
     public function cardDrawNumbers(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = $session->get("deck");
 
         $data = [
@@ -139,8 +132,7 @@ class CardControllerRoutes extends AbstractController
     public function cardDrawNumbersCallback(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $session->set("drawNumber", $request->request->get('draw_cards'));
 
         return $this->redirectToRoute('card_draw');
