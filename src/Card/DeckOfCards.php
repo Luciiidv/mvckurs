@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Card;
+
 use App\Card\Card;
 use App\Card\CardGraphic;
 
-class DeckOfCards {
+class DeckOfCards
+{
     public $deckOfCards;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->deckOfCards = [
             new Card("A", "Spades"), new Card("2", "Spades"),
             new Card("3", "Spades"), new Card("4", "Spades"), new Card("5", "Spades"),
@@ -32,11 +35,22 @@ class DeckOfCards {
         ];
     }
 
-    public function getDeckOfCards() {
+    public function getDeckOfCards()
+    {
         return $this->deckOfCards;
     }
 
-    public function shuffle() {
+    public function shuffle()
+    {
         shuffle($this->deckOfCards);
+    }
+
+    public function deckOfCardsJson()
+    {
+        $stringDeck = [];
+        foreach ($this->getDeckOfCards() as $cards) {
+            $stringDeck[] = [$cards->getValue() . " " . $cards->getColor()];
+        }
+        return $stringDeck;
     }
 }
