@@ -50,10 +50,7 @@ class CardControllerRoutes extends AbstractController
     }
 
     #[Route("/card", name: "card", methods: ['GET'])]
-    public function card(
-        // Request $request,
-        SessionInterface $session
-    ): Response {
+    public function card(): Response {
         return $this->render('card/card.html.twig');
     }
 
@@ -91,7 +88,6 @@ class CardControllerRoutes extends AbstractController
 
     #[Route("/card/deck/draw/{number}", name: "card_draw", methods: ['GET', 'POST'])]
     public function cardDraw(
-        Request $request,
         SessionInterface $session,
         $number = 1
     ): Response {
