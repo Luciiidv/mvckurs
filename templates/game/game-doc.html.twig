@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Doc{% endblock %}
+
+{% block body %}
+    
+    <div class="photo-column">
+        <img src="{{ asset('build/images/Flodesschema-kortspel.png') }}" alt="flodesschema" class="aboutbild">
+    </div>
+
+    <h2>Psuedo kod</h2>
+
+    <p>deck.shuffleCardDeck()</p>
+
+    <p>player draws one card from deck addCardHand()</p>
+
+    <p>player choose draw one more card until done</p>
+
+    <p>if player score > 21, bank wins</p>
+
+    <p>if done bank draws cards until reach >=17</p>
+
+    <p>if bank score > 21, player wins</p>
+
+    <p>else if >=17 and more points then player, bank wins</p>
+
+    <p>else if player has more points then bank, player wins</p>
+
+    <h2>Klasser</h2>
+
+    <h3>addBankHand</h3>
+
+    <p>Draw card to bank.</p>
+
+    <h3>addToBankHand</h3>
+
+    <p>Adds a set of cards to bank</p>
+
+    <h3>getBankHand</h3>
+
+    <p>Shows banks cards</p>
+
+    <h3>apiBankHand</h3>
+
+    <p>Shows banks cards in json api</p>
+
+    <h3>countPlayerPoints</h3>
+
+    <p>Sums players points</p>
+
+    <h3>countBankPoints</h3>
+
+    <p>Sums bank points</p>
+
+    <h3>winner</h3>
+
+    <p>Calculates and return the winner</p>
+
+{% endblock %}

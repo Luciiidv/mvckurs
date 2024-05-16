@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+
+<h2>Banken drog dessa kort.</h2>
+{% for cards in bankHand %}
+    <p>{{ cards }}</p>
+{% endfor %}
+
+<h3>{{ winner }}</h3>
+
+<p>Spelarens poäng: {{ playerPoints }}</p>
+
+<p>Bankens poäng: {{ bankPoints }}</p>
+
+<p><a href="{{ path('init_game') }}">Nytt spel</a></p>
+
+{# {{ dump(deckSession) }} #}
+
+{% endblock %}

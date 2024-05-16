@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+
+<h2>Dina kort.</h2>
+{% for cards in cardHand %}
+    <p>{{ cards }}</p>
+{% endfor %}
+
+<p>Poäng: {{ playerPoints }}</p>
+
+{% if not lostGame %}
+<p><a href="{{ path('draw_card') }}">Ett till kort</a></p>
+<p><a href="{{ path('bank') }}">Nöjd, Bankens tur</a></p>
+{% else %}
+<p>{{ lostGame }}</p>
+{% endif %}
+{# {{ dump(deckSession) }} #}
+
+{% endblock %}
