@@ -6,6 +6,9 @@ use App\Card\Card;
 
 class CardGraphic extends Card
 {
+    protected $representation;
+    public $deckGraphic;
+
     public function __construct($value = null, $color = null)
     {
         parent::__construct($value, $color);
@@ -22,18 +25,19 @@ class CardGraphic extends Card
 
     public function getSymbol($color)
     {
-        if($color) {
-            if ($color === 'Spades') {
-                return "\u{2660}";
-            } elseif ($color === 'Hearts') {
-                return "\u{2665}";
-            } elseif ($color === 'Diamonds') {
-                return "\u{2666}";
-            } else {
-                return "\u{2663}";
-            }
+        if ($color === 'Spades') {
+            return "\u{2660}";
         }
-        return;
+    
+        if ($color === 'Hearts') {
+            return "\u{2665}";
+        }
+    
+        if ($color === 'Diamonds') {
+            return "\u{2666}";
+        }
+    
+        return "\u{2663}";
     }
 
     public function deckToString($deck)
