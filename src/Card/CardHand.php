@@ -8,11 +8,13 @@ class CardHand
 {
     public $cardHand;
     public $cardDeck;
+    public $bankHand;
 
     public function __construct()
     {
         $this->cardHand = [];
         $this->cardDeck = [];
+        $this->bankHand = [];
     }
 
     public function addCardHand($numberOfCards, $deckOfCards)
@@ -22,6 +24,17 @@ class CardHand
         }
         $cardsToAdd = array_slice($deckOfCards, 0, $numberOfCards);
         $this->cardHand = array_merge($this->cardHand, $cardsToAdd);
+
+        $this->cardDeck = array_slice($deckOfCards, $numberOfCards);
+    }
+
+    public function addBankHand($numberOfCards, $deckOfCards)
+    {
+        if(!$deckOfCards || $numberOfCards > count($deckOfCards)) {
+            return $this;
+        }
+        $cardsToAdd = array_slice($deckOfCards, 0, $numberOfCards);
+        $this->bankHand = array_merge($this->bankHand, $cardsToAdd);
 
         $this->cardDeck = array_slice($deckOfCards, $numberOfCards);
     }
@@ -36,6 +49,13 @@ class CardHand
         }
     }
 
+    public function addToBankHand($cards)
+    {
+        for ($i = 0; $i < count($cards); $i++) {
+            $this->bankHand[] = $cards[$i];
+        }
+    }
+
     public function getCardHand()
     {
         return $this->cardHand;
@@ -44,6 +64,11 @@ class CardHand
     public function getCardDeck()
     {
         return $this->cardDeck;
+    }
+
+    public function getBankHand()
+    {
+        return $this->bankHand;
     }
 
     public function apiCardHand()
@@ -62,5 +87,81 @@ class CardHand
             $apiCardDeck[] = $card;
         }
         return $apiCardDeck;
+    }
+
+    public function apiBankHand()
+    {
+        $apiBankHand = [];
+        foreach($this->bankHand as $card) {
+            $apiBankHand[] = $card;
+        }
+        return $apiBankHand;
+    }
+
+    public function countPlayerPoints()
+    {
+        $points = 0;
+        foreach($this->cardHand as $point) {
+            if ($point[1] == "1" && $point[2] == "0") {
+                $points += 10;
+            } elseif ($point[1] == "J") {
+                $points += 11;
+            } elseif ($point[1] == "Q") {
+                $points += 12;
+            } elseif ($point[1] == "K") {
+                $points += 13;
+            } elseif ($point[1] == "A") {
+                if ($points + 14 < 21) {
+                    $points += 14;
+                } else {
+                    $points += 1;
+                }
+            } else {
+                $points += intval($point[1]);
+            }
+        }
+        return $points;
+    }
+
+    public function countBankPoints()
+    {
+        $points = 0;
+        foreach($this->bankHand as $point) {
+            if ($point[1] == "1" && $point[2] == "0") {
+                $points += 10;
+            } elseif ($point[1] == "J") {
+                $points += 11;
+            } elseif ($point[1] == "Q") {
+                $points += 12;
+            } elseif ($point[1] == "K") {
+                $points += 13;
+            } elseif ($point[1] == "A") {
+                if ($points + 14 < 21) {
+                    $points += 14;
+                } else {
+                    $points += 1;
+                }
+            } else {
+                $points += intval($point[1]);
+            }
+        }
+        return $points;
+    }
+
+    public function winner()
+    {
+        $result = "";
+
+        if ($this->countPlayerPoints() && $this->countBankPoints() < 22) {
+            if ($this->countPlayerPoints() > $this->countBankPoints()) {
+                $result = "Spelaren vann!";
+            } else {
+                $result = "Banken vann!";
+            }
+        } else {
+            $result = "Spelaren vann!";
+        }
+
+        return $result;
     }
 }
