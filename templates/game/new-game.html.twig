@@ -13,9 +13,10 @@
 
 {% if not lostGame %}
 <p><a href="{{ path('draw_card') }}">Ett till kort</a></p>
-<p><a href="{{ path('bank') }}">Nöjd, Bankens tur</a></p>
+<p><a href="{{ path('end_game') }}">Nöjd, Bankens tur</a></p>
 {% else %}
 <p>{{ lostGame }}</p>
+<p><a href="{{ path('init_game') }}">Spela igen</a></p>
 {% endif %}
 {# {{ dump(deckSession) }} #}
 

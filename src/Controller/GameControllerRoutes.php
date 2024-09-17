@@ -75,7 +75,8 @@ class GameControllerRoutes extends AbstractController
         $data = [
             "cardHand" => $playerHand->getCardHand(),
             "playerPoints" => $playerHand->countPlayerPoints(),
-            "lostGame" => null
+            "lostGame" => null,
+            "cardDeck" => $session->get("gameDeck")
         ];
 
         return $this->render('game/new-game.html.twig', $data);
@@ -90,45 +91,20 @@ class GameControllerRoutes extends AbstractController
         // return $this->render('game/new_game.html.twig');
     }
 
-    #[Route("/game/bank", name: "bank", methods: ['GET'])]
-    public function bank(
-        SessionInterface $session
-    ): Response {
-        $deck = $session->get("gameDeck");
-        $currentBankHand = $session->get("bankHand", []);
-
-        //Skapa en han till banken
-        $bankHand = new CardHand();
-        $bankHand->addToBankHand($currentBankHand);
-        $bankHand->addBankHand(1, $deck);
-
-        //Lägg till poäng
-        while ($bankHand->countBankPoints() < 17) {
-            $bankHand->addBankHand(1, $deck);
-        }
-
-        //Setta bankhanden och poängen till sessionen
-        $session->set("bankHand", $bankHand->getBankHand());
-        $session->set("bankPoints", $bankHand->countBankPoints());
-
-        return $this->redirectToRoute('end_game');
-    }
-
     #[Route("/game/end-game", name: "end_game", methods: ['GET'])]
     public function endGame(
         SessionInterface $session
     ): Response {
 
+        $deck = $session->get("gameDeck");
         $playerPoints = $session->get("playerPoints");
-        $bankPoints = $session->get("bankPoints");
         $currentBankHand = $session->get("bankHand");
         $currentPlayerHand = $session->get("playerHand");
 
         $hands = new CardHand();
         $hands->addToHand($currentPlayerHand);
         $hands->addToBankHand($currentBankHand);
-
-        // var_dump($deck);
+        $hands->addBankHand($deck);
 
         //Vinnaren
         $winner = $hands->winner();
@@ -136,12 +112,12 @@ class GameControllerRoutes extends AbstractController
         $data = [
             "bankHand" => $hands->getBankHand(),
             "playerPoints" => $playerPoints,
-            "bankPoints" => $bankPoints,
-            "winner" => $winner
+            "bankPoints" => $hands->countBankPoints(),
+            "winner" => $winner,
+            "cardDeck" => $hands->getCardDeck()
         ];
 
         return $this->render('game/end-game.html.twig', $data);
-        // return $this->render('game/new_game.html.twig');
     }
 
 

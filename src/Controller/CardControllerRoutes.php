@@ -50,7 +50,8 @@ class CardControllerRoutes extends AbstractController
     }
 
     #[Route("/card", name: "card", methods: ['GET'])]
-    public function card(): Response {
+    public function card(): Response
+    {
         return $this->render('card/card.html.twig');
     }
 

@@ -28,15 +28,19 @@ class CardHand
         $this->cardDeck = array_slice($deckOfCards, $numberOfCards);
     }
 
-    public function addBankHand($numberOfCards, $deckOfCards)
+    public function addBankHand($deckOfCards)
     {
-        if(!$deckOfCards || $numberOfCards > count($deckOfCards)) {
+        if(!$deckOfCards || 1 > count($deckOfCards)) {
             return $this;
         }
-        $cardsToAdd = array_slice($deckOfCards, 0, $numberOfCards);
-        $this->bankHand = array_merge($this->bankHand, $cardsToAdd);
+        while ($this->countBankPoints() < 17) {
+            $cardsToAdd = array_shift($deckOfCards);
 
-        $this->cardDeck = array_slice($deckOfCards, $numberOfCards);
+            $this->bankHand = array_merge($this->bankHand, [$cardsToAdd]);
+
+            // $this->cardDeck = array_slice($deckOfCards, 1);
+        }
+        $this->cardDeck = $deckOfCards;
     }
 
     public function addToHand($cards)
