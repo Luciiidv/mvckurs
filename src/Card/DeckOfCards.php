@@ -9,6 +9,9 @@ class DeckOfCards
 {
     public $deckOfCards;
 
+    /**
+     * Constructs a deck of cards.
+     */
     public function __construct()
     {
         $this->deckOfCards = [
@@ -35,16 +38,25 @@ class DeckOfCards
         ];
     }
 
+    /**
+     * Returns deck of cards.
+     */
     public function getDeckOfCards()
     {
         return $this->deckOfCards;
     }
 
+    /**
+     * shuffle deck.
+     */
     public function shuffle()
     {
         shuffle($this->deckOfCards);
     }
 
+    /**
+     * Returns deck in json format.
+     */
     public function deckOfCardsJson()
     {
         $stringDeck = [];

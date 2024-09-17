@@ -9,6 +9,9 @@ class CardGraphic extends Card
     protected $representation;
     public $deckGraphic;
 
+    /**
+     * Constructs CardGraphic class.
+     */
     public function __construct($value = null, $color = null)
     {
         parent::__construct($value, $color);
@@ -18,28 +21,37 @@ class CardGraphic extends Card
         }
     }
 
+    /**
+     * Gets card as a string "[ value color]"
+     */
     public function getAsString()
     {
         return $this->representation;
     }
 
+    /**
+     * Returns unicode char of the specific color.
+     */
     public function getSymbol($color)
     {
         if ($color === 'Spades') {
             return "\u{2660}";
         }
-    
+
         if ($color === 'Hearts') {
             return "\u{2665}";
         }
-    
+
         if ($color === 'Diamonds') {
             return "\u{2666}";
         }
-    
+
         return "\u{2663}";
     }
 
+    /**
+     * Returns whole deck in string format.
+     */
     public function deckToString($deck)
     {
         // $this->deckGraphic = [];
@@ -50,6 +62,9 @@ class CardGraphic extends Card
         return $this;
     }
 
+    /**
+     * Adds an array to deckGraphic.
+     */
     public function addArray($array)
     {
         // $this->deckGraphic = [];
@@ -59,6 +74,9 @@ class CardGraphic extends Card
         return $this;
     }
 
+    /**
+     * Shuffle deck
+     */
     public function shuffleCardDeck()
     {
         return shuffle($this->deckGraphic);
