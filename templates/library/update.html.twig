@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Uppdatera bok{% endblock %}
+
+{% block body %}
+
+    <form method="post" action="{{ path('library_update', {id: book.getId}) }}">
+        <fieldset>
+            <legend>Uppdatera boken {{ book.name|e }} i biblioteket</legend>
+
+            <p>
+                <label>Namn/Titel:<br>
+                    <input type="text" name="name" placeholder="Uppdatera namn/titel">
+                </label>
+            </p>
+
+                    <p>
+                <label>ISBN:<br>
+                    <input type="text" name="isbn" placeholder="Uppdatera ISBN">
+                </label>
+            </p>
+
+                    <p>
+                <label>Författare:<br>
+                    <input type="text" name="author" placeholder="Uppdatera Författare">
+                </label>
+            </p>
+
+            <p>
+                <label>Bild:<br>
+                    <input type="text" name="image" placeholder="Uppdatera bild">
+                </label>
+            </p>
+
+            <p>
+                <input type="submit" name="Uppdatera" value="Update">
+            </p>
+        </fieldset>
+    </form>
+
+{% endblock %}

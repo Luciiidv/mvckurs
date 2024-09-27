@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Information om alla böcker {% endblock %}
+
+{% block body %}
+
+    <table style="width:100%">
+        <tr>
+            <th>Titel</th>
+            <th>ISBN</th>
+            <th>Författare</th>
+            <th>Mer info</th>
+        </tr>
+        {% for book in library %}
+        <tr>
+            <td>{{ book.getName|e }}</td>
+            <td>{{ book.getIsbn|e }}</td>
+            <td>{{ book.getAuthor|e }}</td>
+            <td><a href="{{ path('library_by_id', {id: book.getId}) }}">Mer info</a></td>
+            <td><a href="{{ path('update_form', {id: book.getId}) }}">Uppdatera</a>|<a href="{{ path('library_delete_by_id', {id: book.getId}) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('create_form') }}">Lägg till en bok i biblioteket</a>
+{% endblock %}

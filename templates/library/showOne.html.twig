@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Information om boken {{book.getName}} {% endblock %}
+
+{% block body %}
+
+    <h1>{{ book.getName|e }}({{ book.getId|e }})</h1>
+    <p>ISBN: {{ book.getIsbn|e }}</p>
+    <p>Författare: {{ book.getAuthor|e }}</p>
+    <img src="{{ book.getImage|e }}" alt="Image of book" width="500" height="300">
+    {# {{dump(book)}} #}
+{% endblock %}
