@@ -15,7 +15,7 @@ class CardGraphic extends Card
     public function __construct($value = null, $color = null)
     {
         parent::__construct($value, $color);
-        $deckGraphic = [];
+        $this->deckGraphic = [];
         if($value && $color) {
             $this->representation = '[' . $value . $this->getSymbol($color) . ']';
         }

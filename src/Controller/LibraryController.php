@@ -37,7 +37,7 @@ class LibraryController extends AbstractController
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
-        var_dump("success");
+        // var_dump("success");
         return $this->redirectToRoute('library_show_all');
     }
 

@@ -45,7 +45,9 @@ class CardHand
 
     public function addToHand($cards)
     {
-        for ($i = 0; $i < count($cards); $i++) {
+        $allCards = count($cards);
+
+        for ($i = 0; $i < $allCards; $i++) {
             // $card = $deckOfCards[$i];
             // unset($deckOfCards[$i]);
             // $this->cardHand[$i] = $card;
@@ -55,7 +57,9 @@ class CardHand
 
     public function addToBankHand($cards)
     {
-        for ($i = 0; $i < count($cards); $i++) {
+        $allCards = count($cards);
+
+        for ($i = 0; $i < $allCards; $i++) {
             $this->bankHand[] = $cards[$i];
         }
     }
