@@ -29,7 +29,7 @@ class DeckOfCardsTest extends TestCase
         $testDeck = $deck->getDeckOfCards();
         $deck->shuffle();
         $shuffledDeck = $deck->getDeckOfCards();
-    
+
         $this->assertNotEquals($shuffledDeck, $testDeck);
     }
 }

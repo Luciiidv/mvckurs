@@ -401,6 +401,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-LuckyControllerTwig.html#method_report"
         },                {
+            "fqsen": "\\App\\Controller\\LuckyControllerTwig\u003A\u003Ametrics\u0028\u0029",
+            "name": "metrics",
+            "summary": "",
+            "url": "classes/App-Controller-LuckyControllerTwig.html#method_metrics"
+        },                {
             "fqsen": "\\App\\Controller\\LuckyControllerTwig\u003A\u003Aapi\u0028\u0029",
             "name": "api",
             "summary": "",

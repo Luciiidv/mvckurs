@@ -5,16 +5,6 @@
 {% block body %}
     <h1>Metrics</h1>
 
-    <ul class="list">
-        <li><a href="#kmom01">kmom01</a></li>
-        <li><a href="#kmom02">kmom02</a></li>
-        <li><a href="#kmom03">kmom03</a></li>
-        <li><a href="#kmom04">kmom04</a></li>
-        <li><a href="#kmom05">kmom05</a></li>
-        <li><a href="#kmom06">kmom06</a></li>
-        <li><a href="#kmom10">kmom10</a></li>
-    </ul>
-
     <h2>Introduktion</h2>
 
     <p>Jag skall nu dokumentera min kod utifrån de 6C:na om kodkvalitet. De 6 C:na är Codestyle, Coverage, Complexity, Cohesion, Coupling och CRAP.</p>
@@ -34,6 +24,7 @@
     <p>Går jag in och tittar på min complexitet så kan jag se att jag har en average cyclomatic complexity by class 4. Min average weight method Count by class är 6.94. Lite svårt att tolka dessa siffror men det mesta ser ok ut. CardHand är den klassen som sticker ut lite i komplexitet</p>
     <p>Sedan kollar jag på coupling. Här toppar CardGraphic listan med 4 afferent coupling och 3 efferent coupling. Något annat som är tydligt här är att controller routsen här har en hög efferent coupling som förväntat då dessa använder sig av många andra klasser.</p>
     <p>Tillsist så vill jag visa en bild på mainainability/complexity som tydligt visar att den svåraste klassen att både underhålla och som är mest komplex är klassen CardHand.</p>
+    <img src="{{ asset('build/images/phpmetrics.jpg') }}" alt="">
 
     <h2>Scrutinizer</h2>
 
@@ -43,10 +34,23 @@
     <p>I klassen GameControllerRoutes så hittar den en bug där "The type App\Card\CardGame was not found." troligtvis att jag har deklarerat den fel. I LibraryController.php så finner den en debug kod som scrutinizer föreslår att jag kan ta bort. Fick även en bug (issue) i min test klass DeckOfCardsTest.php där den påpekar att min shuffle() metod alltid returnerar null när jag testar den.</p>
     <p>Tittar jag vidare på volymen så kan jag se att CardHand toppar listan med 163 i size som jag tycker är en ok volym.</p>
     <p>Sedan så väljer jag att ta en titt på min kodtäckning och här visar det rött då jag har under 40% kodtäckning. Är inte ett så bra betyg men när jag undersöker det vidare så syns det att jag endå har bra kodtäckning där jag anser att det är som viktigast i mina klasser för spelet 21. I min mest komplexa klass CardHand som har en komplexitet på 43 så har jag hela 97% kodtäcknig som jag anser är bra. Kollar jag på dom andra klasserna så har dom väldigt låg komplexitet jämfört med CardHand så då är det kanske inte lika "viktigt" att ha en hög kodtäckning på dessa klasser. Vidare så kan jag se att mina library classer har högre lite högre komplexitet än andra klasser.</p>
+    <img src="{{ asset('build/images/scrutinizer.jpg') }}" alt="">
     <img src="https://scrutinizer-ci.com/g/Luciiidv/mvckurs/badges/quality-score.png?b=main" alt="quality score">
     <img src="https://scrutinizer-ci.com/g/Luciiidv/mvckurs/badges/coverage.png?b=main" alt="coverage">
     <img src="https://scrutinizer-ci.com/g/Luciiidv/mvckurs/badges/build.png?b=main" alt="build">
 
+    <h2>Förbättringar</h2>
 
+    <p>Jag kommer välja att försöka fixa 7 issues som jag har fått i scrutinizer för att försöka få ett bättre betyg och cleanare kod än innan testerna. 2 issues väljer jag att låta vara då det är klasser som jag ej har skapat.</p>
+    <p>Överlag så tycker jag att jag har fått ihop en bra kod som fungerar så jag vill inte pilla i den allt för mycket heller så dessa förbättringar tycker jag är goda för att få till en bättre kod. Förhoppningsvis så lyckas jag förbättra mitt betyg ytterligare i scrutinizer efter dessa ändringar.</p>
+    <p>När jag gjorde analysen så är det främst CardHand klassen som sticker ut lite i komplex kod men förövrigt så har jag fått bra resultat. Eftersom CardHand klassen fungerar bra och har hög coverage så väljer jag att låta den vara som den är.</p>
+    <p>Efter att jag har fixat alla mina issues så har det tyvärr inte ändrats något från betyget som jag hade hoppats på men jag är endå nöjd med mitt betyg som jag har fått på min kod (9.59). Jag lyckades bli av med alla issues som för mig var det viktiga med att förbättra min kod. Jag misstänker att för att få ett bättre betyg på scrutinizer så behöver jag nog ändra i min CardHand klass då det är enda klassen som har fått B i rating. Somsagt så är CardHand den mest komplexa klassen som jag har men eftersom att koden gör det den skall och jag har hög coverage så låter jag den vara för tillfället.</p>
+    <img src="{{ asset('build/images/rating.jpg') }}" alt="">
+    <p>När jag tar en titt i phpmetrics så ser den nästan likadan ut som innan förbättringarna förutom att volymen har ökat lite. Här så tycker jag inte att violationsen som visades var speciellt allvarliga som i scrutinizer så jag lät det vara som det va.</p>
+
+    <h2>Diskussion</h2>
+
+    <p>Efter att ha använt dessa verktyg för att förbättra min kod så tycker jag definitivt att detta är ett utmärkt sätt att arbeta med Clean code. Nackdelen är väl att det kan bli mycket jobb med förbättringarna om man implementerar dessa tekniker långt in i ett projekt. I exemplet med Cimage som med dessa verktyg får ett dåligt betyg men å andra sidan har ett program som fungerar väl och används av flera människor. Bortsett från detta så tycker jag endå att det är ett bra sätt att arbeta med olika verktyg för att få en så bra kod som möjligt och jag tror även att det gör det lättare att arbeta i team om alla jobbar mot dessa principer.</p>
+    <p>Som jag var inne på lite innan med Cimage så tror jag att det är viktigt att arbeta med dessa verktyg i tidigt skede så att det inte blir att för krångligt att ändra på sin kod efter att man har skrivit mycket kod med mycket volym. Då kan det helt plötsligt bli väldigt komplext att gå tillbaks och göra förändringar.</p>
     
 {% endblock %}
