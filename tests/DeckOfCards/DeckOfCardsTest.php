@@ -27,8 +27,9 @@ class DeckOfCardsTest extends TestCase
 
         //Testing shuffle and get method.
         $testDeck = $deck->getDeckOfCards();
-        // $shuffledDeck = $deck->shuffle();
-
-        $this->assertNotEquals($deck->shuffle()->getDeckOfCards(), $testDeck);
+        $deck->shuffle();
+        $shuffledDeck = $deck->getDeckOfCards();
+    
+        $this->assertNotEquals($shuffledDeck, $testDeck);
     }
 }
