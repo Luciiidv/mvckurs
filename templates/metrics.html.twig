@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Metrics</h1>
+
+    <ul class="list">
+        <li><a href="#kmom01">kmom01</a></li>
+        <li><a href="#kmom02">kmom02</a></li>
+        <li><a href="#kmom03">kmom03</a></li>
+        <li><a href="#kmom04">kmom04</a></li>
+        <li><a href="#kmom05">kmom05</a></li>
+        <li><a href="#kmom06">kmom06</a></li>
+        <li><a href="#kmom10">kmom10</a></li>
+    </ul>
+
+    <h2>Introduktion</h2>
+
+    <p>Jag skall nu dokumentera min kod utifrån de 6C:na om kodkvalitet. De 6 C:na är Codestyle, Coverage, Complexity, Cohesion, Coupling och CRAP.</p>
+    <p>Codestyle: Är ett generellt betyg på hur bra kod(kodkvalitet) man har skrivit, i Scrutinizer så får man ett betyg från 1-10 där 10 är högst betyg. Ju bättre kodkvalitet man har desto mindre buggar har koden och desto lättare är det att underhålla. Man vill helst bygga ett program med Clean code som följer en viss standard.</p>
+    <p>Coverage: Med Coverage så innebär det hur väl testad kod man har. En hög coverage innebär att man har testat sin kod väl med enhetstester. En Väl testad kod brukar innebära att koden funkar som den skall.</p>
+    <p>Complexity: Är det tal som innebär hur komplex kod man har. En komplex kod innebär att en metod kan ta flera vägar ju fler vägar desto mer komplex är metoden. En kod som har flera intabbningar (if/elseif/else/loopar) är mer komplex än en kod som endast returnerar ett värde. Ett högt värde här är därför med komplext.</p>
+    <p>Cohesion: Är ett mättal på hur bra koden hänger ihop, hur tätt kopplade metoderna i en klass är till varandra. Ett bra värde för koden här är när koden endast har 1 ansvarsområde. En klass som har flera metoder som ej hänger ihop med varandra är därmed mindre bra. Om koden har högt cohesion värde så har man en tydligare kod som är lättare att underhålla.</p>
+    <p>Coupling: Innebär hur klasser är kopplade till varandra, en klass kan t.ex. användas i andra klasser eller tvärtom där klasser använder andra klasser. Efferent coupling(Ce) mäter hur många utomstående klasser denna klass är beroende av. Afferent coupling(Ca) mäter hur många klasser som är beroende av denna klass. Här vill man ha ett så lågt värde som möjligt som innebär att klassen är stabil och är ej beroende av andra klasser. 1 innebär ett högt värde och 0 är ett bra värde.</p>
+    <p>CRAP: Change Risk Analyzer and Predictor. Är en mix av storleken på metoden, hur komplex metoden är och hur vältestad den är. En hög CRAP score innebär därmed en att metoden kan vara svårare att underhålla och är ofta känslig. Här är det viktigt att dokumentera metoden väl och testa den.</p>
+
+    <h2>Phpmetrics</h2>
+
+    <p>Jag börjar med att analysera violations och här har jag fått 6st violations. 2st klasser här har eventuellt buggar och det är klasserna CardHand och CardControllerRoutes. Här föreslår phpmetrics att jag skall ta en extra titt på min unittest på dessa klasser.</p>
+    <p>2st klasser (CardControllerRoutes, LibraryController) har fått violations "Blob/God object" som innebär att klasserna har osamanhängande metoder "Lack of Cohesion", eventuellt för många metoder. Det kan också innebära att klasserna använder sig av för många externa metoder, detta gör koden svårare att underhålla eftersom att den blir beroende av andra klasser. Här föreslås det att jag ska dela upp klasserna i mindre klasser så att dom blir tydligare i vad dom gör.</p>
+    <p>2st klasser har fått varningar "Stable Abstractions Principle"  och det är klasserna "Entity" och "Card". Här har båda klasserna fått varningen att klasserna är instabila och abstrakta. Här antar jag att man bör göra klasserna mer stabila om det går.</p>
+    <p>När jag går vidare och tittar på volymen så kan man tydligt se att CardHand klassen är den största klassen med 143 rader kod som får anses vara ok och ligger inom ramen att inte vara för stor(under 200 rader kod).</p>
+    <p>Går jag in och tittar på min complexitet så kan jag se att jag har en average cyclomatic complexity by class 4. Min average weight method Count by class är 6.94. Lite svårt att tolka dessa siffror men det mesta ser ok ut. CardHand är den klassen som sticker ut lite i komplexitet</p>
+    <p>Sedan kollar jag på coupling. Här toppar CardGraphic listan med 4 afferent coupling och 3 efferent coupling. Något annat som är tydligt här är att controller routsen här har en hög efferent coupling som förväntat då dessa använder sig av många andra klasser.</p>
+    <p>Tillsist så vill jag visa en bild på mainainability/complexity som tydligt visar att den svåraste klassen att både underhålla och som är mest komplex är klassen CardHand.</p>
+
+    <h2>Scrutinizer</h2>
+
+    <p>Scrutinizer har gett min kod hela 9.59(very good) poäng på en 10 gradig skala som jag anser är väldigt bra! Vidare går jag in och tittar på issues (9 issues) för att se vad som går att förbättra.  2st  buggar hittar den på klassen .php-cs-fixer.dist.php, eftersom det är en klass som jag inte har skapat så låter jag den vara för tillfället.</p>
+    <p>I klassen CardGraphic så föreslår den att jag kan ta bort variabeln $deckGraphic då den tycker att den räknas som död kod eftersom jag tilldelar den ett värde som inte används efter tilldelning.</p>
+    <p>Klassen CardHand har 2st issues där båda är samma. I denna klasen använder jag mig av Count funktionen i en for-loop 2 gånger. Här föreslår scrutinizer att jag istället sätter värdet på iterationen innan loopen för bättre prestanda.</p>
+    <p>I klassen GameControllerRoutes så hittar den en bug där "The type App\Card\CardGame was not found." troligtvis att jag har deklarerat den fel. I LibraryController.php så finner den en debug kod som scrutinizer föreslår att jag kan ta bort. Fick även en bug (issue) i min test klass DeckOfCardsTest.php där den påpekar att min shuffle() metod alltid returnerar null när jag testar den.</p>
+    <p>Tittar jag vidare på volymen så kan jag se att CardHand toppar listan med 163 i size som jag tycker är en ok volym.</p>
+    <p>Sedan så väljer jag att ta en titt på min kodtäckning och här visar det rött då jag har under 40% kodtäckning. Är inte ett så bra betyg men när jag undersöker det vidare så syns det att jag endå har bra kodtäckning där jag anser att det är som viktigast i mina klasser för spelet 21. I min mest komplexa klass CardHand som har en komplexitet på 43 så har jag hela 97% kodtäcknig som jag anser är bra. Kollar jag på dom andra klasserna så har dom väldigt låg komplexitet jämfört med CardHand så då är det kanske inte lika "viktigt" att ha en hög kodtäckning på dessa klasser. Vidare så kan jag se att mina library classer har högre lite högre komplexitet än andra klasser.</p>
+    <img src="https://scrutinizer-ci.com/g/Luciiidv/mvckurs/badges/quality-score.png?b=main" alt="quality score">
+    <img src="https://scrutinizer-ci.com/g/Luciiidv/mvckurs/badges/coverage.png?b=main" alt="coverage">
+    <img src="https://scrutinizer-ci.com/g/Luciiidv/mvckurs/badges/build.png?b=main" alt="build">
+
+
+    
+{% endblock %}
