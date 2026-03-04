@@ -123,3 +123,107 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.gaming-board {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    border: 2px solid black;
+    padding: 1em;
+    border-radius: 25%;
+    width: 100%;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.player-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blackjack-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.hand-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 1em;
+}
+
+.action-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1em;
+}
+
+.blackjack-container a {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #008CBA;
+}
+
+.bank-board {
+    display: flex;
+    flex-direction: row;
+}
+
+.proj-navbar {
+    font-family: monospace;
+}
+
+.proj-navbar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+.proj-navbar ul li {
+    float: left;
+}
+
+
+.proj-navbar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.proj-navbar ul li a:hover {
+    background-color: #111111;
+}
+
+.proj-header {
+    background-color: #26244d;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 5rem;
+}
+
+.proj-footer {
+    font-family: monospace;
+    background-color: #26244d;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
