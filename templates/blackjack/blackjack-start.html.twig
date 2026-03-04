@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{# {% block title %}About{% endblock %} #}
+
+{% block navbar %}
+    {% include 'blackjack/blackjack-navbar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    
+    <div class="main-column">
+    <h1>Starta spelet genom att välja antal händer du skall spela mot dealern och antal markörer du skall spela med</h1>
+    <p>Obs! du kan max spela 3 händer med 100 markörer.</p>
+    <form action="{{ path('blackjack_game') }}" method="post">
+        <label for="hands">Antal händer:</label>
+        <input type="number" id="hands" name="hands" min="1" max="3" value="1" required>
+        <br>
+        <label for="markers">Antal markörer:</label>
+        <input type="number" id="markers" name="markers" min="1"  max="100" value="1" required>
+        <br>
+        <input type="submit" value="Starta spel">
+    </form>
+    </div>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'blackjack/blackjack-footer.html.twig' %}
+{% endblock %}

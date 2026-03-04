@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{# {% block title %}About{% endblock %} #}
+
+{% block navbar %}
+    {% include 'blackjack/blackjack-navbar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    
+    <div class="main-column">
+    <h1>Spelet Blackjack!</h1>
+    <p>Blackjack spelas med kort där spelaren ska försöka hamna så nära siffran 21 som möjligt. De klädda korten: Knekt (J), Dam (Q) och Kung (K) har värdet 10, medan ess (A) kan vara värt både 11 och 1. Resterande kort har det värde som anges. Det bästa man kan få i spelet, en så kallad Blackjack, består av ett ess och ett kort värt tio.</p>
+    <p>Omgången inleds med att spelarna får två kort vardera medan dealern får ett kort. Nu kommer det kluriga. Spelarna får nu välja att ta ytterligare kort eller stanna. Får någon spelare mer än 21 förlorar de genast. När alla spelare tagit så många kort de vill är det dags för dealern. Där finns det regler för hur det ska ageras. Har dealern mindre än 17 måste hen ta kort oavsett vad spelarna har. Mer än 17 måste dealern alltid stanna. Blir det mer än 21 har casinot förlorat och alla spelare som fortfarande är kvar vinner. Har dealern mellan 17 och 21 vinner den av spelaren och dealern som är närmast 21. Alla vinster betalar 1:1 förutom Blackjack som ger en och en halv gånger insatsen (3:2). Det finns dock ytterligare ett par saker att tänka på.</p>
+    <h1>Dubbla</h1>
+    <p>Om spelaren på sina två första kort får ett sammanlagt värde på 9, 10 eller 11 kan hen välja att dubbla. Det går till som så att spelaren satsar lika mycket till som redan satsats. Var insatsen 100 kronor från början får man helt enkelt lägga in 100 kronor till, och sedan ges endast ett kort till. Det är en extra bra idé att göra när dealern har 4, 5 eller 6 som är de sämsta startkorten för banken.</p>
+    <h1>Splitta</h1>
+    <p>Splitta är precis vad det låter. Om spelarens två första kort har samma värde kan de välja att lägga till en lika stor insats som utgångssatsningen och då helt enkelt dela på korten och spela på två ställen. Om spelaren exempelvis satsat 100 kronor och får två stycken åttor i grundgiven kan man satsa 100 kronor extra och då få två olika händer som har varsin åtta från start. Det är speciellt bra att ta till vid just fall då spelaren har två stycken åttor, nior eller ess medan banken har 4, 5 eller 6. Tior ska generellt sett aldrig splittas då 20 är en så stark starthand.</p>
+    <p><a href="{{ path('blackjack_start') }}">Nytt spel</a></p>
+    </div>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'blackjack/blackjack-footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{# {% block title %}About{% endblock %} #}
+
+{% block navbar %}
+    {% include 'blackjack/blackjack-navbar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    
+    <div class="main-column">
+    <h1>About</h1>
+
+    <p>Denna projekt-sidan handlar om att skapa ett Blackjack-spel med PHP och Symfony.</p>
+
+    <p>Navigera mellan sidorna för information och att spela spelet.</p>
+    </div>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'blackjack/blackjack-footer.html.twig' %}
+{% endblock %}

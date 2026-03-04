@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{# {% block title %}Blackjack{% endblock %} #}
+
+{% block navbar %}
+    {% include 'blackjack/blackjack-navbar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+<div class="blackjack-container">
+
+<h2>{{ message }}</h2>
+<h2>Dealerns hand.</h2>
+
+<div class="bank-board">
+
+{% for cards in bankHand %}
+    <p>{{ cards }}</p>
+{% endfor %}
+
+</div>
+
+<p>Dealern har: {{ bankPoints }} poäng</p>
+
+<div class="gaming-board">
+
+<div class="player-board">
+
+<h2>Dina kort</h2>
+
+{% for key, hand in playerHands %}
+    <div class="hand-container">
+    
+    {% for card in hand.cards %}
+        <p>{{ card }}</p>
+    {% endfor %}
+    
+    </div>
+
+    <p><strong>Poäng:</strong> {{ hand.points }}</p>
+
+    <div class="action-container">
+    
+    {% if not hand.lostGame %}
+    <p><a href="{{ path('draw_card_bj', { hand: key }) }}">
+    Ett till kort
+    </a></p>
+    <p><a href="{{ path('split', { hand: key }) }}">Splitta</a></p>
+    <p><a href="{{ path('double', { hand: key }) }}">Dubbla</a></p>
+    {% else %}
+    <p>Du har överstigit 21</p>
+    {% endif %}
+    
+    </div>
+
+{% endfor %}
+
+<h2>Totala markörer: {{ totalChips }}</h2>
+
+{% if endGame %}
+<p><a href="{{ path('blackjack_start') }}">Spela ny omgång</a></p>
+{% else %}
+<p><a href="{{ path('end_blackjack') }}">Nöjd, Bankens tur</a></p>
+{% endif %}
+
+</div>
+</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'blackjack/blackjack-footer.html.twig' %}
+{% endblock %}
