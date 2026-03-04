@@ -12,7 +12,7 @@ use App\Repository\LibraryRepository;
 
 class LibraryController extends AbstractController
 {
-    #[Route('/library/create/form', name: 'create_form', methods: ['POST'])]
+    #[Route('/library/create/form', name: 'create_form', methods: ['POST', 'GET'])]
     public function createBookForm(): Response
     {
         return $this->render('library/create.html.twig');
