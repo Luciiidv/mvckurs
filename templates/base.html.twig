@@ -15,7 +15,7 @@
     </head>
     <body>
 
-    <header class="site-header">
+    {# <header class="site-header">
         <span class="site-title">My Symfony Site</span>
     </header>
 
@@ -30,13 +30,20 @@
             <li><a href="{{ path('game') }}">Game</a></li>
             <li><a href="{{ path('library_show_all') }}">Library</a></li>
             <li><a href="{{ path('metrics') }}">Metrics</a></li>
+            <li><a href="{{ path('blackjack') }}">Blackjack</a></li>
         </ul>
-    </nav>
+    </nav> #}
+        {% block navbar %}
+            {% include 'header-navbar.html.twig' %}
+        {% endblock %}
 
         {% block body %}{% endblock %}
     </body>
 
-    <footer>
+    {% block footer %}
+        {% include 'footer.html.twig' %}
+    {% endblock %}
+    {# <footer>
         <p>En footer!!!!</p>
-    </footer>
+    </footer> #}
 </html>
