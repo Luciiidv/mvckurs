@@ -14,6 +14,8 @@ class BlackJackCardHand
     public $bankHand;
     public $totalChips;
     public $hands;
+    public $message;
+    public $endGame;
 
     public function __construct()
     {
@@ -33,7 +35,7 @@ class BlackJackCardHand
 
     public function addCardHand($numberOfCards, $handIndex)
     {
-        if(!$this->cardDeck || $numberOfCards > count($this->cardDeck)) {
+        if(empty($this->cardDeck) || $numberOfCards > count($this->cardDeck)) {
             return $this;
         }
         $cardsToAdd = array_slice($this->cardDeck, 0, $numberOfCards);
@@ -296,8 +298,9 @@ class BlackJackCardHand
 
         $chipsToAdd = (($chips) / $playersActive) * 2;
         $chipsToWithdraw = ($chips) / $playersActive;
+        $totalHands = count($this->hands);
 
-        for ($i = 0; $i < count($this->hands); $i++) {
+        for ($i = 0; $i < $totalHands; $i++) {
             if( $this->hands[$i]['lostGame'] ) {
                 continue;
             }
@@ -320,7 +323,9 @@ class BlackJackCardHand
     public function activePlayers()
     {
         $playersActive = 0;
-        for($i = 0; $i < count($this->hands); $i++) {
+        $totalHands = count($this->hands);
+
+        for($i = 0; $i < $totalHands; $i++) {
             if (!$this->hands[$i]['lostGame']) {
                 $playersActive += 1;
             }
