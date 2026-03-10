@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1773159546">
-  <project timestamp="1773159546">
+<coverage generated="1773160012">
+  <project timestamp="1773160012">
     <file name="/home/lucation/dbwebb-kurser/mvc/me/report/src/Card/BlackJackCardHand.php">
       <class name="App\Card\BlackJackCardHand" namespace="global">
         <metrics complexity="67" methods="24" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="115" elements="169" coveredelements="129"/>
